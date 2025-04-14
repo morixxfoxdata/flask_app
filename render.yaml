@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: flask-uv-demo
+    runtime: python
+    buildCommand: "pip install -r requirements.txt" # ①最も簡単
+    # ②uv を本番でも使いたい場合（任意）:
+    # buildCommand: |
+    #   curl -LsSf https://astral.sh/uv/install.sh | sh
+    #   uv pip install -r requirements.txt
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"
